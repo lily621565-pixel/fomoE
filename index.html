@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fomoE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="chat-card" aria-label="fomoE 聊天介面">
+      <header class="chat-header">
+        <div class="chat-brand">
+          <div class="brand-avatar">F</div>
+          <div class="brand-copy">
+            <strong>fomoE</strong>
+            <p>像真人一樣來回對話</p>
+          </div>
+        </div>
+        <button id="restart-chat" class="header-btn" type="button">重新開始</button>
+      </header>
+
+      <div id="chat-log" class="chat-log" aria-live="polite"></div>
+
+      <form id="composer-form" class="composer" autocomplete="off">
+        <label class="composer-box" for="message-input">
+          <textarea id="message-input" rows="1" placeholder="把你現在的猶豫、抗拒，或想模擬的對話直接打進來"></textarea>
+        </label>
+        <div class="composer-actions">
+          <button id="export-transcript" class="utility-btn" type="button">匯出逐字稿</button>
+          <button id="send-message" class="send-btn" type="submit">送出</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="./engine.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

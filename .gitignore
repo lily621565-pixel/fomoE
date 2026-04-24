@@ -1,0 +1,11 @@
+*.log
+*.tmp
+*.bak
+
+node_modules/
+dist/
+build/
+coverage/
+
+fomo-sparring-transcript-*.txt
+.DS_Store
