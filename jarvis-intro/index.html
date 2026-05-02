@@ -46,7 +46,19 @@
 
     #viewport {
       width: 100vw;
+      width: 100dvw;
       height: 100vh;
+      height: 100dvh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 12px;
+    }
+
+    #frame {
+      position: relative;
+      width: min(calc(100vw - 24px), calc((100dvh - 24px) * 16 / 9));
+      height: min(calc(100dvh - 24px), calc((100vw - 24px) * 9 / 16));
       display: grid;
       place-items: center;
       overflow: hidden;
@@ -516,25 +528,21 @@
     }
 
     @media (max-width: 1200px) {
-      html,
-      body {
-        overflow: auto;
-      }
-
-      body {
-        display: block;
-      }
-
       #viewport {
-        min-height: 100vh;
-        padding: 20px 0;
+        padding: 10px;
+      }
+
+      #frame {
+        width: min(calc(100vw - 20px), calc((100dvh - 20px) * 16 / 9));
+        height: min(calc(100dvh - 20px), calc((100vw - 20px) * 9 / 16));
       }
     }
   </style>
 </head>
 <body>
   <div id="viewport">
-    <div id="stage">
+    <div id="frame">
+      <div id="stage">
       <div class="grid"></div>
       <div class="blob blob-a" id="blobA"></div>
       <div class="blob blob-b" id="blobB"></div>
@@ -688,12 +696,14 @@
         </div>
         <div class="caption">如果你要的是不只看起來厲害，而是真的能把工作推到完成，Jarvis 會比一般 AI 工具更接近你要的那個夥伴。</div>
       </section>
+      </div>
     </div>
   </div>
 
   <script>
     const DURATION = 30;
     const viewport = document.getElementById("viewport");
+    const frame = document.getElementById("frame");
     const stage = document.getElementById("stage");
     const blobA = document.getElementById("blobA");
     const blobB = document.getElementById("blobB");
@@ -772,9 +782,11 @@
     }
 
     function fitStage() {
-      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      const frameWidth = frame.clientWidth;
+      const frameHeight = frame.clientHeight;
+      const scale = Math.min(frameWidth / 1920, frameHeight / 1080);
       stage.style.transform = "scale(" + scale.toFixed(4) + ")";
-      viewport.style.minHeight = Math.round(1080 * scale) + "px";
+      stage.style.boxShadow = scale < 0.5 ? "0 14px 48px rgba(17, 22, 27, 0.1)" : "";
     }
 
     function renderSceneVisibility(current) {
